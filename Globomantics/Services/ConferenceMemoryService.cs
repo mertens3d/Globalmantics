@@ -28,13 +28,13 @@ namespace Globomantics.Services
         public Task<StatisticsModel> GetStatistics()
         {
             return Task.Run(() =>
-              {
-                  return new StatisticsModel
-                  {
-                      NumberOfAttendees = conferences.Sum(c => c.AttendeeTotal),
-                      AverageConcerenceAttendees = (int)conferences.Average(c => c.AttendeeTotal)
-                  };
-              }
+            {
+                return new StatisticsModel
+                {
+                    NumberOfAttendees = conferences.Sum(c => c.AttendeeTotal),
+                    AverageConcerenceAttendees = (int) conferences.Average(c => c.AttendeeTotal)
+                };
+            });
         }
 
         public Task Add(ConferenceModel model)
