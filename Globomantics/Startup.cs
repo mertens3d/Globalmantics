@@ -13,6 +13,7 @@ namespace Globomantics
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc();
             services.AddSingleton<IConferenceService, ConferenceMemoryService>();
             services.AddSingleton<IProposalService, ProposalMemoryService>();
         }
@@ -24,20 +25,31 @@ namespace Globomantics
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseStatusCodePages();
+            //app.UseStatusCodePagesWithRedirects();
+            app.UseStaticFiles();
 
-            app.Use(async (context, next) =>
+            //app.Use(async (context, next) =>
+            //{
+            //    //await context.Response.WriteAsync("Hello World!");
+            //    logger.LogInformation("Before second");
+            //    await next();
+            //    logger.LogInformation("After second");
+            //});
+
+            //app.Run(async (context) =>
+            //{
+            //    logger.LogInformation("Second");
+            //    await context.Response.WriteAsync("Second Text");
+            //});
+
+            app.UseMvc(routes =>
             {
-                //await context.Response.WriteAsync("Hello World!");
-                logger.LogInformation("Before second");
-                await next();
-                logger.LogInformation("After second");
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Conference}/{action=Index}/{id?}");
             });
 
-            app.Run(async (context) =>
-            {
-                logger.LogInformation("Second");
-                await context.Response.WriteAsync("Second Text");
-            });
         }
     }
 }

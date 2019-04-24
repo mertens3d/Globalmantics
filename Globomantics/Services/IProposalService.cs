@@ -6,7 +6,7 @@ using Shared.Models;
 
 namespace Globomantics.Services
 {
-    interface IProposalService
+    public interface IProposalService
     {
         Task Add(ProposalModel model);
         Task<ProposalModel> Approve(int proposalId);

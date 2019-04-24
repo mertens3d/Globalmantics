@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Globomantics.Services
 {
-    interface IConferenceService
+    public interface IConferenceService
     {
         Task<IEnumerable<ConferenceModel>> GetAll();
         Task<ConferenceModel> GetById(int id);
