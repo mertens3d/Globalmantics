@@ -7,11 +7,11 @@ namespace Globomantics.Services
 {
     public class ProposalMemoryService : IProposalService
     {
-        private readonly List<ProposalModel> proposals = new List<ProposalModel>();
+        private readonly List<ProposalModel> _proposals = new List<ProposalModel>();
 
         public ProposalMemoryService()
         {
-            proposals.Add(new ProposalModel()
+            _proposals.Add(new ProposalModel()
             {
                 Id = 1,
                 ConferenceId = 1,
@@ -19,14 +19,14 @@ namespace Globomantics.Services
                 Title = "Understanding APT.NET Core Security"
             });
 
-            proposals.Add(new ProposalModel()
+            _proposals.Add(new ProposalModel()
             {
                 Id = 2,
                 ConferenceId = 2,
                 Speaker = "John Reynolds",
                 Title = "Starting Your Developer Career"
             });
-            proposals.Add(new ProposalModel()
+            _proposals.Add(new ProposalModel()
             {
                 Id = 3,
                 ConferenceId = 2,
@@ -37,8 +37,8 @@ namespace Globomantics.Services
 
         public Task Add(ProposalModel model)
         {
-            model.Id = proposals.Max(p => p.Id) + 1;
-            proposals.Add(model);
+            model.Id = _proposals.Max(p => p.Id) + 1;
+            _proposals.Add(model);
             return Task.CompletedTask;
         }
 
@@ -46,7 +46,7 @@ namespace Globomantics.Services
         {
             return Task.Run(() =>
             {
-                var proposal = proposals
+                var proposal = _proposals
                     .First(x => x.Id == proposalId);
                 if (proposal != null)
                 {
@@ -61,7 +61,7 @@ namespace Globomantics.Services
 
         public Task<IEnumerable<ProposalModel>> GetAll(int conferenceId)
         {
-            return Task.Run(() => proposals.AsEnumerable());
+            return Task.Run(() => _proposals.Where(x => x.ConferenceId == conferenceId));
         }
     }
 }
