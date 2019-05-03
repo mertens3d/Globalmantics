@@ -18,7 +18,14 @@ namespace Globomantics
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+            //.ConfigureAppConfiguration((ctx, cfg) =>
+            //{
+            //    cfg.add
+            //})
+
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
+
+        //.Build();
     }
 }

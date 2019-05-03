@@ -11,8 +11,8 @@ namespace Globomantics.Services
         private readonly List<ConferenceModel> conferences = new List<ConferenceModel>();
         public ConferenceMemoryService()
         {
-            conferences.Add(new ConferenceModel() { Id = 1, Name = "NDC", Location = "Oslo", Start = new DateTime(2002, 11, 1) });
-            conferences.Add(new ConferenceModel() { Id = 2, Name = "IT/DevConnections", Location = "Oslo", Start = new DateTime(2002, 11, 1) });
+            conferences.Add(new ConferenceModel() { Id = 1, Name = "NDC", Location = "Oslo", Start = new DateTime(2002, 11, 1), AttendeeTotal = 2132});
+            conferences.Add(new ConferenceModel() { Id = 2, Name = "IT/DevConnections", Location = "Oslo", Start = new DateTime(2002, 11, 1) ,AttendeeTotal = 3210});
 
         }
         public Task<IEnumerable<ConferenceModel>> GetAll()
@@ -32,7 +32,7 @@ namespace Globomantics.Services
                 return new StatisticsModel
                 {
                     NumberOfAttendees = conferences.Sum(c => c.AttendeeTotal),
-                    AverageConcerenceAttendees = (int) conferences.Average(c => c.AttendeeTotal)
+                    AverageConferenceAttendees = (int) conferences.Average(c => c.AttendeeTotal)
                 };
             });
         }
